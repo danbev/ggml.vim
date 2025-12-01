@@ -3,6 +3,7 @@
 if exists('g:loaded_ggml_plugin')
   finish
 endif
+
 let g:loaded_ggml_plugin = 1
 
 if !exists('g:ggml_last_tensor')
@@ -51,4 +52,4 @@ endfunction
 " Command and mapping use the simple-name function
 command! -nargs=+ GGMLDebug call GGMLDebugInsert(<f-args>)
 
-nnoremap <silent> <leader>gt :call GGMLDebugInsert(input('Tensor name: '), input('Count: '))<CR>
+nnoremap <silent> <leader>gd :call GGMLDebugInsert(input('Tensor name: '), input('Count: '))<CR>
