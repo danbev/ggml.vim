@@ -1,0 +1,20 @@
+*ggml.txt*   Documentation for ggml debug plugin
+
+==============================================================================
+GGMLDebug                                              *GGMLDebug*
+
+GGMLDebug {tensor_name} {count}
+
+Inserts a ggml tensor debug block which can be useful when debugging
+graph computations in ggml/llama.cpp. A good place to uses this is in
+llama.cpp in llama-context.cpp in process_ubatch after the graph has
+been computed.
+
+One thing to keep in mind is that tensor can be reused by the scheduler
+in ggml so it might be required to set the tensor as output to pervent
+this:
+ggml_set_output(tensor);
+
+Example:
+
+    :GGMLDebug top_p_mask 100
