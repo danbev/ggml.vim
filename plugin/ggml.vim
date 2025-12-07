@@ -53,3 +53,26 @@ endfunction
 command! -nargs=+ GGMLDebug call GGMLDebugInsert(<f-args>)
 
 nnoremap <silent> <leader>gd :call GGMLDebugInsert(input('Tensor name: '), input('Count: '))<CR>
+
+function! GGMLSingleInsert() abort
+  let lines = [
+  \ '  ', 
+  \ ' ggml_build_forward_expand(gf, inp->get_attn()->get_k_idxs()); ',
+  \ ' ggml_build_forward_expand(gf, inp->get_attn()->get_v_idxs()); ',
+  \ ' ggml_build_forward_expand(gf, inp->get_attn()->get_kq_mask());',
+  \ ' ',
+  \ ' for (int il = 0; il < 1; ++il) { ',
+  \ '     ... ',  
+  \ ' if (il == 0) { ',
+  \ ]
+
+  call append(line('.'), lines)
+
+  redraw
+  echohl WarningMsg
+  echom 'GGML: Modify the layer iteration loop as needed.'
+  echohl None
+
+endfunction
+
+command! GGMLSingleLayer call GGMLSingleInsert()
